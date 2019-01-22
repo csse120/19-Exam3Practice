@@ -1,5 +1,5 @@
 """
-PRACTICE Test 3.
+PRACTICE Exam 3.
 
 This problem provides practice at:
   ***  LOOPS WITHIN LOOPS in PRINTING-TO-CONSOLE problems.  ***
@@ -9,7 +9,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          and PUT_YOUR_NAME_HERE.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-########################################################################
+###############################################################################
 # Students:
 #
 # These problems have DIFFICULTY and TIME ratings:
@@ -27,7 +27,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
 #    if you reach the time estimate and are NOT close to a solution,
 #    STOP working on that problem and ASK YOUR INSTRUCTOR FOR HELP
 #    on it, in class or via Piazza.
-########################################################################
+###############################################################################
 
 
 def main():
@@ -75,22 +75,22 @@ def shape(r):
     Preconditions:  r is a positive number.
     For purposes of "lining up", assume r is a single digit.
     """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # TODO: 2. Implement and test this function.
     #          Some tests are already written for you (above).
     #
-    ####################################################################
+    ###########################################################################
     # IMPLEMENTATION RESTRICTION:
     #   You may NOT use string multiplication in this problem.
-    ####################################################################
-    # ------------------------------------------------------------------
+    ###########################################################################
+    # -------------------------------------------------------------------------
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:  15 minutes.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
 
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 main()

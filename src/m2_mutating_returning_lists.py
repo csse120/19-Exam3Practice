@@ -1,5 +1,5 @@
 """
-PRACTICE Test 3.
+PRACTICE Exam 3.
 
 This problem provides practice at:
   ***  MUTATING  and  RETURNING-NEW  LISTS.  ***
@@ -9,7 +9,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          and PUT_YOUR_NAME_HERE.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-########################################################################
+###############################################################################
 # Students:
 #
 # These problems have DIFFICULTY and TIME ratings:
@@ -27,7 +27,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
 #    if you reach the time estimate and are NOT close to a solution,
 #    STOP working on that problem and ASK YOUR INSTRUCTOR FOR HELP
 #    on it, in class or via Piazza.
-########################################################################
+###############################################################################
 
 
 def main():
@@ -37,7 +37,7 @@ def main():
 
 def run_test_doubler():
     """ Tests the    doubler    function. """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # TODO: 2. Implement this TEST function.
     #   It TESTS the  doubler  function defined below.
     #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
@@ -46,12 +46,12 @@ def run_test_doubler():
     #
     #   As usual, include both EXPECTED and ACTUAL results in your tests
     #   and compute the latter BY HAND (not by running your program).
-    # ------------------------------------------------------------------
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      3
     #    TIME ESTIMATE:   10 minutes.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
     print()
     print('--------------------------------------------------')
@@ -80,9 +80,9 @@ def run_test_doubler():
     print('The returned value is:       ', answer)
     print('The returned value should be:', expected)
 
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # TO DO 2 (continued): Add your ADDITIONAL test(s) here:
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
 
 def doubler(list1, list2):
@@ -102,18 +102,18 @@ def doubler(list1, list2):
         :type list1: list of int
         :type list2: list of int
     """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # TODO: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
-    # ------------------------------------------------------------------
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      4
     #    TIME ESTIMATE:   5 minutes.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
 
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 main()

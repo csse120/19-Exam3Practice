@@ -1,5 +1,5 @@
 """
-PRACTICE Test 3.
+PRACTICE Exam 3.
 
 This problem provides practice at:
   ***  SEQUENCES.  ***
@@ -9,7 +9,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          and PUT_YOUR_NAME_HERE.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-########################################################################
+###############################################################################
 # Students:
 #
 # These problems have DIFFICULTY and TIME ratings:
@@ -27,7 +27,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
 #    if you reach the time estimate and are NOT close to a solution,
 #    STOP working on that problem and ASK YOUR INSTRUCTOR FOR HELP
 #    on it, in class or via Piazza.
-########################################################################
+###############################################################################
 
 import simple_testing as st
 import math
@@ -65,23 +65,23 @@ def is_prime(n):
             return False
 
     return True
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Students:
     #   Do NOT touch the above  is_prime  function - it has no TO DO.
     #   Do NOT copy code from this function.
     #
     # Instead, ** CALL ** this function as needed in the problems below.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
 
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Students: Some of the testing code below uses SimpleTestCase objects,
 #           from the imported   simple_testing (st)   module.
 #           See details in the  test  code below.
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 def run_test_practice_problem4a():
     """ Tests the    practice_problem4a    function. """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # 4 tests.  They use the imported   simple_testing (st)   module.
     # Each test is a SimpleTestCase with 3 arguments:
     #   -- the function to test,
@@ -90,7 +90,7 @@ def run_test_practice_problem4a():
     # For example, the first test below will call
     #   practice_problem4v((9, 33, 8, 8, 0, 4, 4, 8))
     # and compare the returned value against [2, 5] (the correct answer).
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     tests = [st.SimpleTestCase(practice_problem4a,
                                [(9, 33, 8, 8, 0, 4, 4, 8)],
                                [2, 5]),
@@ -134,19 +134,19 @@ def practice_problem4a(sequence):
     Type hints:
       :type sequence: list | tuple | string
     """
-    ####################################################################
+    ###########################################################################
     # TODO: 2. Implement and test this function.
     #     The testing code is already written for you (above).
-    ####################################################################
+    ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 minutes.
-    ####################################################################
+    ###########################################################################
 
 
 def run_test_practice_problem4b():
     """ Tests the    practice_problem4b    function. """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # 5 tests.  They use the imported   simple_testing (st)   module.
     # Each test is a SimpleTestCase with 3 arguments:
     #   -- the function to test,
@@ -155,7 +155,7 @@ def run_test_practice_problem4b():
     # For example, the first test below will call
     #   practice_problem4b((12, 33, 18, 9, 13, 3, 9, 20, 19, 20))
     # and compare the returned value against 19 (the correct answer).
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     tests = [st.SimpleTestCase(practice_problem4b,
                                [(12, 33, 18, 9, 13, 3, 9, 20, 19, 20)],
                                19),
@@ -174,9 +174,9 @@ def run_test_practice_problem4b():
                                - 11),
              ]
 
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Run the 5 tests in the   tests   list constructed above.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     st.SimpleTestCase.run_tests('practice_problem4b', tests)
 
 
@@ -197,21 +197,21 @@ def practice_problem4b(sequence):
     Type hints:
       :type sequence: (list | tuple) of (float | int)
     """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # TODO: 3. Implement and test this function.
     #     The testing code is already written for you (above).
-    ####################################################################
+    ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 minutes.
-    ####################################################################
+    ###########################################################################
 
 
 def run_test_practice_problem4c():
     """ Tests the    practice_problem4c    function. """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # 3 tests.  They use the imported   simple_testing (st)   module.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     argument1 = (rg.Point(5, 12),
                  rg.Point(20, 20),
                  rg.Point(1, 13),
@@ -250,9 +250,9 @@ def run_test_practice_problem4c():
              st.SimpleTestCase(practice_problem4c, [argument3], answer3),
              st.SimpleTestCase(practice_problem4c, [argument4], answer4),
              ]
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Run the 3 tests in the   tests   list constructed above.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     st.SimpleTestCase.run_tests('practice_problem4c', tests)
 
     if argument1[4] != answer1:
@@ -295,23 +295,23 @@ def practice_problem4c(points):
       :type points: tuple of rg.Point
       :rtype: rg.Point | string
     """
-    ####################################################################
+    ###########################################################################
     # TODO: 4. Implement and test this function.
     #     The testing code is already written for you (above).
     #
     # IMPORTANT: This problem is your LOWEST PRIORITY for preparing
     #  for Test 2.  It is a great problem but WAY more subtle
     #  than anything that you will see on Test 2.
-    ####################################################################
+    ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      9
     #    TIME ESTIMATE:   15 minutes.
-    ####################################################################
+    ###########################################################################
 
 
 def run_test_practice_problem4d():
     """ Tests the    practice_problem4d    function. """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # 5 tests.  They use the imported   simple_testing (st)   module.
     # Each test is a SimpleTestCase with 3 arguments:
     #   -- the function to test,
@@ -320,7 +320,7 @@ def run_test_practice_problem4d():
     # For example, the first test below will call
     #   practice_problem4d((6, 80, 17, 13, 40, 3, 3, 7, 13, 7, 12, 5))
     # and compare the returned value against 40 (the correct answer).
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     tests = [st.SimpleTestCase(practice_problem4d,
                                [(6, 80, 17, 13, 40, 3, 3, 7, 13, 7, 12, 5)],
                                17 + 3 + 7 + 13),
@@ -391,17 +391,17 @@ def practice_problem4d(sequence):
       :type sequence: (list | tuple) of int
       :rtype: int
     """
-    ####################################################################
+    ###########################################################################
     # TODO: 5. Implement and test this function.
     #     The testing code is already written for you (above).
-    ####################################################################
+    ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 minutes.
-    ####################################################################
+    ###########################################################################
 
 
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 main()

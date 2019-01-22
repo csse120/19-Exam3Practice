@@ -1,5 +1,5 @@
 """
-PRACTICE Test 3.
+PRACTICE Exam 3.
 
 This problem provides practice at:
   ***  LOOPS WITHIN LOOPS, SEQUENCES and MUTATION  ***
@@ -31,10 +31,12 @@ def run_test_zero_changer():
     print('  Expected:', expected1)
     print('  Actual:  ', test1)
 
-    # ------------------------------------------------------------------
-    # TODO: 2. Write at least 2 additional tests for the  zero_changer   function.
-    #   Try do do some unexpected things like empty lists or an empty tuple.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
+    # TODO: 2. Write at least 2 additional tests for the
+    #    zero_changer
+    # function.  Try to choose some unexpected things like empty lists
+    # or an empty tuple, or a list with no zeros, etc.
+    # -------------------------------------------------------------------------
 
 
 def zero_changer(tuple_of_lists):
@@ -61,18 +63,18 @@ def zero_changer(tuple_of_lists):
     Type hints:
       :type tuple_of_lists: tuple of list[int]
     """
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # TODO: 3. Implement and test this function.
     #   Note that you should write its TEST function first (above).
-    # ------------------------------------------------------------------
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:  10 minutes.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
 
 
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 main()

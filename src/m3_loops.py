@@ -1,5 +1,5 @@
 """
-PRACTICE Test 3.
+PRACTICE Exam 3.
 
 This problem provides practice at:
   ***  FOR and WHILE loops.  ***
@@ -9,7 +9,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          and PUT_YOUR_NAME_HERE.
 """  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
-########################################################################
+###############################################################################
 # Students:
 #
 # These problems have DIFFICULTY and TIME ratings:
@@ -27,7 +27,7 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
 #    if you reach the time estimate and are NOT close to a solution,
 #    STOP working on that problem and ASK YOUR INSTRUCTOR FOR HELP
 #    on it, in class or via Piazza.
-########################################################################
+###############################################################################
 
 import simple_testing as st
 import math
@@ -37,15 +37,15 @@ def main():
     """ Calls the   TEST   functions in this module. """
     run_test_practice_problem3()
 
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Students: Some of the testing code below uses SimpleTestCase objects,
 #           from the imported   simple_testing (st)   module.
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 
 def run_test_practice_problem3():
     """ Tests the   practice_problem3  function. """
-    ####################################################################
+    ###########################################################################
     # TODO: 2. Implement this TEST function.
     #   It TESTS the  practice_problem3  function defined below.
     #   Include at least ** 2 ** ADDITIONAL tests beyond those we wrote.
@@ -54,13 +54,13 @@ def run_test_practice_problem3():
     #
     #   As usual, include both EXPECTED and ACTUAL results in your tests
     #   and compute the latter BY HAND (not by running your program).
-    ####################################################################
+    ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      3
     #    TIME ESTIMATE:   10 minutes.
-    ####################################################################
+    ###########################################################################
 
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # 13 tests, plus a 14th after these.
     # They use the imported   simple_testing (st)   module.
     # Each test is a SimpleTestCase with 3 arguments:
@@ -70,7 +70,7 @@ def run_test_practice_problem3():
     # For example, the first test below will call
     #   practice_problem3(-2, 2, 1.3)
     # and compare the returned value against [1, 7] (the correct answer).
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     tests = [st.SimpleTestCase(practice_problem3,
                                [-2, 2, 1.3],
                                [1, 7]),
@@ -120,12 +120,12 @@ def run_test_practice_problem3():
                                     - math.sqrt(2) - 0.00000000001],
                                    big_list))
 
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     # Run the 14 tests in the   tests   list constructed above.
-    # ------------------------------------------------------------------
+    # -------------------------------------------------------------------------
     st.SimpleTestCase.run_tests('practice_problem3', tests)
 
-    ####################################################################
+    ###########################################################################
     # TO DO 2 continued:  More tests:
     #      YOU add at least **   2   ** additional tests here.
     #
@@ -134,7 +134,7 @@ def run_test_practice_problem3():
     #
     # SUGGESTION: Ask an assistant to CHECK your tests to confirm
     #             that they are adequate tests!
-    ####################################################################
+    ###########################################################################
 
 
 def practice_problem3(start, n, threshold):
@@ -208,18 +208,18 @@ def practice_problem3(start, n, threshold):
       :type n:     int
       :type threshold: float
     """
-    ####################################################################
+    ###########################################################################
     # TODO: 3. Implement and test this function.
     #          Some tests are already written for you (above),
     #          but you are required to write ADDITIONAL tests (above).
-    ####################################################################
+    ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   < 15 minutes.
-    ####################################################################
+    ###########################################################################
 
 
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
-# ----------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 main()
