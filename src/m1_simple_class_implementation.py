@@ -1,6 +1,8 @@
 """
 PRACTICE Exam 3.
 
+This problem provides practice at:  *** IMPLEMENTING CLASSES. ***
+
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Derek Whitley, their colleagues,
          and PUT_YOUR_NAME_HERE.
