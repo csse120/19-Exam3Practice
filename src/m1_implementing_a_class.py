@@ -114,12 +114,14 @@ def main():
     print('Un-comment the calls in MAIN one by one')
     print(' to run the testing code as you complete the TODOs.')
 
-    # run_test_init()
-    # run_test_area()
-    # run_test_bigger_triangle()
-    # run_test_shrink_or_expand()
-    # run_test_return_doubled_triangle()
-    # run_test_get_largest_area()
+    run_test_init()
+    run_test_multiply_me()
+    run_test_make_child()
+    run_test_get_point()
+    run_test_get_distance()
+    run_test_swap_colors()
+    run_test_get_recent_color()
+    run_test_get_bigger_size()
 
 
 ###############################################################################
@@ -127,59 +129,95 @@ def main():
 ###############################################################################
 class Blob(object):
 
-    def __init__(self, c, n, b):
+    def __init__(self, c, n):
         """
         What comes in:
           -- self
           -- a string that represents a color
           -- a positive number
-          -- another Blob object
         What goes out: Nothing (i.e., None).
         Side effects:
            Sets instance variables to the given arguments, naming them:
              -- self.color
              -- self.size
-             -- self.other_blob
            Also, sets other instance variables as needed by other Blob methods.
         Type hints:
           :type c: str
           :type n: float
-          :type b: Blob
         """
         # -------------------------------------------------------------------------
         # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
         #    DIFFICULTY for the methods in this class: varies from 2 to 7
-        #    TIME ESTIMATE for implementing the entire class:   25 minutes.
+        #    TIME ESTIMATE for implementing the entire class:   35 minutes.
         # -------------------------------------------------------------------------
+        self.color = c
+        self.size = n
+        self.recent_color = None
 
     def multiply_me(self):
         """
         Mutates this Blob so that its  size  is 10 times what it was just
         before this method was called.
         """
+        self.size = self.size * 10
 
-    def make_child(self):
+    def make_child(self, other_blob):
         """
         Returns a new Blob object whose:
             -- color is the same as this Blob's color
-            -- size is the same as its other_blob's size
-            -- other_blob is this Blob
-        :rtype: Blob
+            -- size is the same as the given other_blob's size
+        Type hints:
+          :type other_blob: Blob
+          :rtype: Blob
         """
+        self.recent_color = self.color
+        return Blob(self.color, other_blob.size)
 
-    def swap_colors(self):
+    def get_point(self, other_blob):
         """
-        Swaps this Blob's color with its other_blob's color.
+        Returns a Point whose x-coordinate is this Blob's size
+        and whose y-coordinate is the given other_blob's size.
+        Type hints:
+          :type other_blob: Blob
+          :rtype: Point
         """
+        return Point(self.size, other_blob.size)
 
-    def get_smallest_child(self):
+    def get_distance(self, other_blob):
         """
-        Returns the Blob that this Blob's  make_child  method has most recently
-        returned.  Returns this Blob if this Blob's  make_child  method has
-        not yet been called.
+        Returns the distance between the following two Points:
+         -- the Point obtained by calling  get_point  (above) on this Blob
+              with argument the given other_blob
+         -- the Point obtained by calling  get_point  on the given other_blob
+              with argument this Blob
+        For credit, you:
+           MUST use the  get_point      method in this (Blob) class!!!
+           MUST use the  distance_from  method in the Point class!!!
+        Type hints:
+          :type other_blob: Blob
+          :rtype: float
         """
+        p1 = self.get_point(other_blob)
+        p2 = other_blob.get_point(self)
+        return p1.distance_from(p2)
 
-    def bigger_size(self, more_blobs):
+    def swap_colors(self, other_blob):
+        """
+        Swaps this Blob's color with the given other_blob's color.
+        """
+        temp = self.color
+        self.color = other_blob.color
+        other_blob.color = temp
+
+    def get_recent_color(self):
+        """
+        Returns the color of the Blob that this Blob's  make_child  method
+        has most recently returned.  If this Blob's  make_child  method
+        has not yet been called, returns None.
+        """
+        return self.recent_color
+
+    def get_bigger_size(self, more_blobs):
         """
         What comes in:
           -- self
@@ -192,254 +230,450 @@ class Blob(object):
           :type more_blobs: List[Blob]
           :rtype: float
         """
+        for k in range(len(more_blobs)):
+            if more_blobs[k].size > self.size:
+                return more_blobs[k].size
+        return -1
 
 
 ###############################################################################
-# The TEST functions for the  Triangle  class begin here.
+# The TEST functions for the  Blob  class begin here.
 ###############################################################################
 def run_test_init():
-    """ Tests the   __init__   method of the Triangle class. """
+    """ Tests the   __init__   method of the Blob class. """
 
     print()
     print('-----------------------------------------------------------')
-    print('Testing the   __init__   method of the Triangle class.')
+    print('Testing the   __init__   method of the Blob class.')
     print('-----------------------------------------------------------')
 
     # Test 1
     print('\nTest 1:')
-    p1 = Point(0, 0)
-    p2 = Point(5, 2)
-    p3 = Point(3, 6)
-    t1 = Triangle(p1, p2, p3)
-
-    expected_a = Point(0, 0)
-    expected_b = Point(5, 2)
-    expected_c = Point(3, 6)
-    run_test_instance_variables(t1, expected_a, expected_b, expected_c)
-
-    if (p1 is t1.a) or (p2 is t1.b) or (p3 is t1.c):
-        print_failure_message(
-            '\nFAILED CLONING: You failed to CLONE the arguments.\n'
-            + 'See your instructor for help.\n')
+    blob_1 = Blob("red", 50)
+    run_test_instance_variables(blob_1, "red", 50)
 
     # Test 2
     print('\nTest 2:')
-    p1 = Point(10, 10)
-    p2 = Point(15, 34)
-    p3 = Point(45, 100)
-    t2 = Triangle(p1, p2, p3)
+    blob_2 = Blob("blue", 88)
+    run_test_instance_variables(blob_2, "blue", 88)
 
-    expected_a = Point(10, 10)
-    expected_b = Point(15, 34)
-    expected_c = Point(45, 100)
-    run_test_instance_variables(t2, expected_a, expected_b, expected_c)
-
-    if (p1 is t1.a) or (p2 is t1.b) or (p3 is t1.c):
-        print_failure_message(
-            '\nFAILED CLONING: You failed to CLONE the arguments.\n'
-            + 'See your instructor for help.\n')
+    # Test 3
+    print('\nTest 3:')
+    blob_1.color = "green"
+    run_test_instance_variables(blob_1, "green", 50)
 
 
-def run_test_area():
-    """ Tests the    area    method of the Triangle class. """
+def run_test_multiply_me():
+    """ Tests the   multiply_me   method of the Blob class. """
 
     print()
     print('-----------------------------------------------------------')
-    print('Testing the   area   method of the Triangle class.')
-    print('-----------------------------------------------------------')
-
-    p1 = Point(15, 35)
-    p2 = Point(15, 50)
-    p3 = Point(35, 45)
-    t1 = Triangle(p1, p2, p3)
-    print()
-    print('Expected for area:', 150.0)
-    print('Actual:           ', t1.area())
-    print_result_of_test(150.0, t1.area())
-
-    p4 = Point(25, 40)
-    p5 = Point(15, 50)
-    p6 = Point(35, 45)
-    t2 = Triangle(p4, p5, p6)
-    print()
-    print('Expected for area:', 75.0)
-    print('Actual:           ', t2.area())
-    print_result_of_test(75.0, t2.area())
-
-    p7 = Point(15, 20)
-    p8 = Point(25, 10)
-    p9 = Point(35, 20)
-    t3 = Triangle(p7, p8, p9)
-    print()
-    print('Expected for area:', 100.0)
-    print('Actual:           ', t3.area())
-    print_result_of_test(100.0, t3.area())
-
-
-def run_test_bigger_triangle():
-    """ Tests the   bigger_triangle   method of the Triangle class. """
-    print()
-    print('-----------------------------------------------------------')
-    print('Testing the   bigger_triangle   method of the Triangle class.')
-    print('-----------------------------------------------------------')
-    p1 = Point(15, 35)
-    p2 = Point(15, 50)
-    p3 = Point(35, 45)
-    t1 = Triangle(p1, p2, p3)
-
-    p4 = Point(40, 45)
-    t2 = Triangle(p1, p2, p4)
-
-    print()
-    print('Expected for bigger_triangle:', True)
-    print('                      Actual:', t2.bigger_triangle(t1))
-    print_result_of_test(True, t2.bigger_triangle(t1))
-
-    print()
-    print('Expected for bigger_triangle:', False)
-    print('                      Actual:', t1.bigger_triangle(t2))
-    print_result_of_test(False, t1.bigger_triangle(t2))
-
-    print()
-    print('Expected for bigger_triangle:', False)
-    print('                      Actual:', t1.bigger_triangle(t1))
-    print_result_of_test(False, t1.bigger_triangle(t1))
-
-    p5 = Point(15, 20)
-    p6 = Point(25, 10)
-    p7 = Point(35, 20)
-    t3 = Triangle(p5, p6, p7)
-
-    p8 = Point(25, 40)
-    p9 = Point(15, 50)
-    p10 = Point(35, 45)
-    t4 = Triangle(p8, p9, p10)
-    print()
-    print('Expected for bigger_triangle:', False)
-    print('                      Actual:', t4.bigger_triangle(t3))
-    print_result_of_test(False, t4.bigger_triangle(t3))
-
-    print()
-    print('Expected for bigger_triangle:', True)
-    print('                      Actual:', t3.bigger_triangle(t4))
-    print_result_of_test(True, t3.bigger_triangle(t4))
-
-    print()
-    print('Expected for bigger_triangle:', True)
-    print('                      Actual:', t1.bigger_triangle(t3))
-    print_result_of_test(True, t1.bigger_triangle(t3))
-
-    print()
-    print('Expected for bigger_triangle:', True)
-    print('                      Actual:', t1.bigger_triangle(t4))
-    print_result_of_test(True, t1.bigger_triangle(t4))
-
-
-def run_test_shrink_or_expand():
-    """ Tests the    shrink_or_expand   method of the Triangle class. """
-    print()
-    print('-----------------------------------------------------------')
-    print('Testing the   shrink_or_expand   method of the Triangle class.')
+    print('Testing the  multiply_me  method of the Blob class.')
     print('-----------------------------------------------------------')
 
     # Test 1
     print('\nTest 1:')
+    blob_1 = Blob("red", 50)
+    blob_1.multiply_me()
+    run_test_instance_variables(blob_1, "red", 500)
+
+    # Test 2
+    print('\nTest 2:')
+    blob_2 = Blob("blue", 88)
+    blob_2.multiply_me()
+    blob_2.multiply_me()
+    run_test_instance_variables(blob_2, "blue", 8800)
+
+    # Test 3
+    print('\nTest 3:')
+    blob_1.color = "green"
+    blob_1.multiply_me()
+    run_test_instance_variables(blob_1, "green", 5000)
+
+    # Test 4
+    print('\nTest 3:')
+    blob_1.color = "black"
+    blob_1.size = 7
+    blob_1.multiply_me()
+    run_test_instance_variables(blob_1, "black", 70)
+
+
+def run_test_make_child():
+    """ Tests the   make_child   method of the Blob class. """
+
+    print()
+    print('-----------------------------------------------------------')
+    print('Testing the   make_child   method of the Blob class.')
+    print('-----------------------------------------------------------')
+
+    # Test 1
+    print('\nTest 1:')
+    blob_1 = Blob("red", 50)
+    blob_2 = Blob("blue", 88)
+    blob_3 = blob_1.make_child(blob_2)
+
+    print()
+    print("For the RETURNED Blob:")
+    run_test_instance_variables(blob_3, "red", 88)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "red", 50)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "blue", 88)
+
+    # Test 2
+    print('\nTest 2:')
+    blob_1 = Blob("white", 500)
+    blob_2 = Blob("black", 888)
+    blob_3 = blob_2.make_child(blob_1)
+
+    print()
+    print("For the RETURNED Blob:")
+    run_test_instance_variables(blob_3, "black", 500)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "white", 500)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "black", 888)
+
+    # Test 3
+    print('\nTest 3:')
+    blob_1.color = "green"
+    blob_2.size = 777
+    blob_3 = blob_1.make_child(blob_2)
+
+    print()
+    print("For the RETURNED Blob:")
+    run_test_instance_variables(blob_3, "green", 777)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "green", 500)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "black", 777)
+
+
+def run_test_get_point():
+    """ Tests the   get_point   method of the Blob class. """
+
+    print()
+    print('-----------------------------------------------------------')
+    print('Testing the   get_point   method of the Blob class.')
+    print('-----------------------------------------------------------')
+
+    # Test 1
+    print('\nTest 1:')
+    blob_1 = Blob("red", 50)
+    blob_2 = Blob("blue", 88)
+    p1 = blob_1.get_point(blob_2)
+
+    print()
+    print("For the RETURNED Point:")
+    print('Expected: ', Point(50, 88))
+    print('Actual:   ', p1)
+    print_result_of_test(Point(50, 88), p1)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "red", 50)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "blue", 88)
+
+    # Test 2
+    print('\nTest 2:')
+    blob_1 = Blob("white", 33)
+    blob_2 = Blob("black", 44)
+    p1 = blob_1.get_point(blob_2)
+
+    print()
+    print("For the RETURNED Point:")
+    print('Expected: ', Point(33, 44))
+    print('Actual:   ', p1)
+    print_result_of_test(Point(33, 44), p1)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "white", 33)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "black", 44)
+
+    # Test 3
+    blob_1.color = "green"
+    blob_2.size = 99
+    p2 = blob_2.get_point(blob_1)
+
+    print()
+    print("For the RETURNED Point:")
+    print('Expected: ', Point(99, 33))
+    print('Actual:   ', p1)
+    print_result_of_test(Point(99, 33), p2)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "green", 33)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "black", 99)
+
+
+def run_test_get_distance():
+    """ Tests the    get_distance    method of the Blob class. """
+    print()
+    print('-----------------------------------------------------------')
+    print('Testing the   get_distance   method of the Blob class.')
+    print('-----------------------------------------------------------')
+
+    # Test 1
+    print('\nTest 1:')
+    blob_1 = Blob("red", 10)
+    blob_2 = Blob("blue", 20)
     p1 = Point(10, 20)
-    p2 = Point(18, 26)
-    p3 = Point(30, 10)
-    t1 = Triangle(p1, p2, p3)
-    t1.shrink_or_expand(0.5)
+    p2 = Point(20, 10)
+    distance = blob_1.get_distance(blob_2)
 
-    expected_a = Point(5, 10)
-    expected_b = Point(9, 13)
-    expected_c = Point(15, 5)
-    run_test_instance_variables(t1, expected_a, expected_b, expected_c)
+    print()
+    print("For the RETURNED distance:")
+    print('Expected: ', p1.distance_from(p2))
+    print('Actual:   ', distance)
+    print_result_of_test(p1.distance_from(p2), distance)
 
-    p1 = Point(20, 50)
-    p2 = Point(10, 30)
-    p3 = Point(5, 60)
-    t2 = Triangle(p1, p2, p3)
-    t2.shrink_or_expand(3)
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "red", 10)
 
-    expected_a = Point(60, 150)
-    expected_b = Point(30, 90)
-    expected_c = Point(15, 180)
-    run_test_instance_variables(t2, expected_a, expected_b, expected_c)
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "blue", 20)
+
+    # Test 2
+    print('\nTest 2:')
+    blob_1 = Blob("cyan", 123)
+    blob_2 = Blob("green", 456)
+    p1 = Point(123, 456)
+    p2 = Point(456, 123)
+    distance = blob_1.get_distance(blob_2)
+
+    print()
+    print("For the RETURNED distance:")
+    print('Expected: ', p1.distance_from(p2))
+    print('Actual:   ', distance)
+    print_result_of_test(p1.distance_from(p2), distance)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "cyan", 123)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "green", 456)
+
+    # Test 3
+    print('\nTest 3:')
+    distance = blob_2.get_distance(blob_1)
+
+    print()
+    print("For the RETURNED distance:")
+    print('Expected: ', p1.distance_from(p2))
+    print('Actual:   ', distance)
+    print_result_of_test(p1.distance_from(p2), distance)
+
+    print()
+    print("The Blob acted upon should not have changed:")
+    run_test_instance_variables(blob_1, "cyan", 123)
+
+    print()
+    print("The Blob argument should not have changed:")
+    run_test_instance_variables(blob_2, "green", 456)
 
 
-def run_test_return_doubled_triangle():
-    """ Tests the  return_doubled_triangle   method of the Triangle class. """
+def run_test_swap_colors():
+    """ Tests the   swap_colors   method of the Blob class. """
+
     print()
     print('-----------------------------------------------------------')
-    print('Testing the  return_doubled_triangle  method of the Triangle class')
+    print('Testing the  swap_colors  method of the Blob class.')
     print('-----------------------------------------------------------')
 
-    p1 = Point(30, 75)
-    p2 = Point(15, 45)
-    p3 = Point(30, 90)
-    t1 = Triangle(p1, p2, p3)
-    t2 = t1.return_doubled_triangle()
+    # Test 1
+    print('\nTest 1:')
+    blob_1 = Blob("red", 55)
+    blob_2 = Blob("blue", 66)
+    blob_1.swap_colors(blob_2)
 
     print()
-    print("Testing whether the correct Triangle was returned:")
-    expected_a = Point(60, 150)
-    expected_b = Point(30, 90)
-    expected_c = Point(60, 180)
-    run_test_instance_variables(t2, expected_a, expected_b, expected_c)
+    print("Blob 1 should now be:")
+    run_test_instance_variables(blob_1, "blue", 55)
 
     print()
-    print("Testing that the Triangle itself was not mutated:")
-    run_test_instance_variables(t1, p1, p2, p3)
+    print("Blob 2 should now be:")
+    run_test_instance_variables(blob_2, "red", 66)
+
+    # Test 2
+    print('\nTest 2:')
+    blob_1.swap_colors(blob_2)
+
+    print()
+    print("Blob 1 should now be:")
+    run_test_instance_variables(blob_1, "red", 55)
+
+    print()
+    print("Blob 2 should now be:")
+    run_test_instance_variables(blob_2, "blue", 66)
+
+    # Test 3
+    print('\nTest 3:')
+    blob_1.color = "green"
+    blob_2.swap_colors(blob_1)
+
+    print()
+    print("Blob 1 should now be:")
+    run_test_instance_variables(blob_1, "blue", 55)
+
+    print()
+    print("Blob 2 should now be:")
+    run_test_instance_variables(blob_2, "green", 66)
+
+    # Test 4
+    print('\nTest 2:')
+    blob_2.size = 999
+    blob_1.swap_colors(blob_2)
+
+    print()
+    print("Blob 1 should now be:")
+    run_test_instance_variables(blob_1, "green", 55)
+
+    print()
+    print("Blob 2 should now be:")
+    run_test_instance_variables(blob_2, "blue", 999)
+
+    # Test 5
+    print('\nTest 2:')
+    blob_1 = Blob("black", 101)
+    blob_1.swap_colors(blob_1)
+
+    print("Blob 1 should now be:")
+    run_test_instance_variables(blob_1, "black", 101)
 
 
-def run_test_get_largest_area():
-    """ Tests the  get_largest_area   method of the Triangle class. """
+def run_test_get_recent_color():
+    """ Tests the get_recent_color method. """
     print()
     print('-----------------------------------------------------------')
-    print('Testing the   get_largest_area   method of the Triangle class.')
+    print('Testing the   get_recent_color   method of the Blob class.')
     print('-----------------------------------------------------------')
-    p1 = Point(5, 5)
-    p2 = Point(12, 8)
-    p3 = Point(5, 9)
-    t1 = Triangle(p1, p2, p3)
-    area1 = t1.area()
+
+    # Test 1
+    print('\nTest 1:')
+    blob_1 = Blob("red", 10)
+    blob_2 = Blob("blue", 20)
 
     print()
-    print('Expected for get_largest_area:', area1)
-    print('                       Actual:', t1.get_largest_area())
-    print_result_of_test(area1, t1.get_largest_area())
+    print("Testing blob_1 before doing make_child on it:")
+    print('Expected for returned value: ', None)
+    print('Actual:                      ', blob_1.get_recent_color())
+    print_result_of_test(None, blob_1.get_recent_color())
 
-    t1.shrink_or_expand(6)
-    area2 = t1.area()
-
-    print()
-    print('Expected for get_largest_area:', area2)
-    print('                       Actual:', t1.get_largest_area())
-    print_result_of_test(area2, t1.get_largest_area())
-
-    t1.shrink_or_expand(0.1)
-    area3 = t1.area()
+    blob_unused = blob_1.make_child(blob_2)
 
     print()
-    print('Expected for get_largest_area:', area2)
-    print('                       Actual:', t1.get_largest_area())
-    print_result_of_test(area2, t1.get_largest_area())
-
-    p1 = Point(5, 5)
-    p2 = Point(12, 8)
-    p3 = Point(5, 9)
-    t2 = Triangle(p1, p2, p3)
-    area4 = t2.area()
+    print("Testing blob_1 after doing make_child on it:")
+    print('Expected for returned value: ', "red")
+    print('Actual:                      ', blob_1.get_recent_color())
+    print_result_of_test("red", blob_1.get_recent_color())
 
     print()
-    print('Expected for get_largest_area:', area4)
-    print('                       Actual:', t2.get_largest_area())
-    print_result_of_test(area4, t2.get_largest_area())
+    print("Testing that blob_2 did not get affected:")
+    print('Expected for returned value: ', None)
+    print('Actual:                      ', blob_2.get_recent_color())
+    print_result_of_test(None, blob_2.get_recent_color())
+
+    # Test 2
+    print('\nTest 2:')
+    blob_1 = Blob("red", 10)
+    blob_2 = Blob("blue", 20)
+    blob_unused = blob_1.make_child(blob_2)
+    blob_1.color = "green"
+    blob_unused = blob_1.make_child(blob_2)
+    blob_2.color = "black"
+    blob_unused = blob_2.make_child(blob_1)
+    blob_1.color = "white"
 
     print()
-    print('Expected for get_largest_area:', area2)
-    print('                       Actual:', t1.get_largest_area())
-    print_result_of_test(area2, t1.get_largest_area())
+    print("Testing blob_2 after a make_child:")
+    print('Expected for returned value: ', "black")
+    print('Actual:                      ', blob_2.get_recent_color())
+    print_result_of_test("black", blob_2.get_recent_color())
+
+
+def run_test_get_bigger_size():
+    """ Tests the    get_bigger_size    method of the Blob class. """
+    print()
+    print('-----------------------------------------------------------')
+    print('Testing the   get_bigger_size   method of the Blob class.')
+    print('-----------------------------------------------------------')
+
+    # Test 1
+    print('\nTest 1:')
+    blob_1 = Blob("red", 100)
+    blobs = [Blob("green", 99),
+             Blob("white", 20),
+             Blob("white", 101),
+             Blob("white", 30),
+             Blob("white", 40)]
+
+    size = blob_1.get_bigger_size(blobs)
+    print("For the RETURNED size:")
+    print('Expected: ', 101)
+    print('Actual:   ', size)
+    print_result_of_test(101, size)
+
+    # Test 2
+    print('\nTest 2:')
+    blob_1 = Blob("red", 200)
+    blobs = [Blob("green", 202),
+             Blob("white", 20),
+             Blob("white", 201),
+             Blob("white", 30),
+             Blob("white", 40)]
+
+    size = blob_1.get_bigger_size(blobs)
+    print("For the RETURNED size:")
+    print('Expected: ', 202)
+    print('Actual:   ', size)
+    print_result_of_test(202, size)
+
+    # Test 3
+    print('\nTest 3:')
+    blob_1 = Blob("red", 102)
+    blobs = [Blob("green", 99),
+             Blob("white", 20),
+             Blob("white", 101),
+             Blob("white", 30),
+             Blob("white", 40)]
+
+    size = blob_1.get_bigger_size(blobs)
+    print("For the RETURNED size:")
+    print('Expected: ', -1)
+    print('Actual:   ', size)
+    print_result_of_test(-1, size)
+
+
+
+
+
 
 
 ###############################################################################
@@ -447,42 +681,39 @@ def run_test_get_largest_area():
 # and help make it easier for us to write tests.
 # Do NOT change any of the following.
 ###############################################################################
-def run_test_instance_variables(triangle, expected_a, expected_b, expected_c):
+def run_test_instance_variables(blob, expected_color, expected_size):
     """
-    Tests whether the instance variables for the given Triangle
+    Tests whether the instance variables for the given Blob
     are per the given expected values.
       -- Prints relevant messages.
       -- Returns True if all is OK, else returns False.
     """
     try:
-        return (run_test_type_of_object(triangle) and
-                run_test_types_of_instance_variables(triangle) and
+        return (run_test_type_of_object(blob) and
+                run_test_types_of_instance_variables(blob) and
                 run_test_values_of_instance_variables(
-                    triangle,
-                    expected_a,
-                    expected_b,
-                    expected_c))
+                    blob,
+                    expected_color,
+                    expected_size))
     except Exception:
         something_unexpected_happened_in_our_testing_code()
         return False
 
 
-def run_test_values_of_instance_variables(triangle, expected_a, expected_b,
-                                          expected_c):
+def run_test_values_of_instance_variables(blob, expected_color, expected_size):
     # Print the EXPECTED and ACTUAL values of the instance variables
-    format_string = '  {:9} {:15} {:15} {:15}'
+    format_string = '  {:10} {:>9} {:>6}'
     print('  Testing instance variables:')
-    print('              a                b                  c')
-    print('            ------           ------            -------')
-    print(format_string.format('Expected:', str(expected_a), str(expected_b),
-                               str(expected_c)))
-    print(format_string.format('Actual:', str(triangle.a), str(triangle.b),
-                               str(triangle.c)))
+    print('                 color   size')
+    print('                 -----   ----')
+    print(format_string.format('Expected:', str(expected_color),
+                               str(expected_size)))
+    print(format_string.format('Actual:', blob.color, blob.size))
 
     # Print a message indicating whether or not
     # the EXPECTED values are equal to the ACTUAL values.
-    expected = (expected_a, expected_b, expected_c)
-    actual = (triangle.a, triangle.b, triangle.c)
+    expected = (expected_color, expected_size)
+    actual = (blob.color, blob.size)
     return print_result_of_test(expected, actual)
 
 
@@ -495,14 +726,14 @@ def something_unexpected_happened_in_our_testing_code():
     print_failure_message(explanation)
 
 
-def run_test_type_of_object(triangle):
-    """ Returns True if the argument is in fact a Triangle object """
-    if isinstance(triangle, Triangle):
+def run_test_type_of_object(blob):
+    """ Returns True if the argument is in fact a Blob object """
+    if isinstance(blob, Blob):
         return True
     else:
         explanation = ('  The following object to test:\n' +
-                       '     ' + str(triangle) + '\n' +
-                       '  should be a Triangle object,\n' +
+                       '     ' + str(blob) + '\n' +
+                       '  should be a Blob object,\n' +
                        '  but it is not.  Perhaps your code\n' +
                        '  returned something of the wrong type?')
         print_failure_message()
@@ -510,25 +741,23 @@ def run_test_type_of_object(triangle):
         return False
 
 
-def run_test_types_of_instance_variables(triangle):
+def run_test_types_of_instance_variables(blob):
     """
-    Returns True if the argument has the right instance variables
-    and they are all numbers.
+    Returns True if the argument has the right instance variables.
+    # and they are all numbers.
     """
     # If NONE of the expected instance variables exist,
     # then perhaps the only "problem" is that the  __init__  method
     # has not yet been implemented.
-    attributes = dir(triangle)
-    if ('a' not in attributes
-            and 'b' not in attributes
-            and 'c' not in attributes):
+    attributes = dir(blob)
+    if ('color' not in attributes
+            and 'size' not in attributes):
         explanation = (
                 '  This object:\n' +
-                '     ' + str(triangle) + '\n' +
+                '     ' + str(blob) + '\n' +
                 '  should have these instance variables:\n' +
-                '     self.a\n' +
-                '     self.b\n' +
-                '     self.c\n' +
+                '     self.color\n' +
+                '     self.size\n' +
                 '  but it has NONE of them.\n' +
                 '  Perhaps you simply have not yet\n' +
                 '  implemented the   __init__   method?\n' +
@@ -539,16 +768,14 @@ def run_test_types_of_instance_variables(triangle):
 
     # If SOME (but not all) of the expected instance variables exist,
     # then perhaps something was misspelled in __init__.
-    if not ('a' in attributes
-            and 'b' in attributes
-            and 'c' in attributes):
+    if not ('color' in attributes
+            and 'size' in attributes):
         explanation = (
                 '  This object:\n' +
-                '     ' + str(triangle) + '\n' +
+                '     ' + str(blob) + '\n' +
                 '  should have these instance variables:\n' +
-                '     self.a\n' +
-                '     self.b\n' +
-                '     self.c\n' +
+                '     self.color\n' +
+                '     self.size\n' +
                 '  but it is missing some of them.\n' +
                 '  Perhaps you misspelled something\n' +
                 '  in your   __init__   code?')
@@ -677,6 +904,4 @@ except Exception:
     print()
     time.sleep(1)
     raise
-
-
 
