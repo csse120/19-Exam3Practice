@@ -3,7 +3,6 @@ PRACTICE Exam 3.
 
 This problem provides practice at:  LOOPS, including:
   ***  FOR and WHILE loops.  ***
-  ***  LOOPS within LOOPS. ***
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Mark Hays, Amanda Stouder, Derek Whitley, their colleagues,
@@ -34,35 +33,144 @@ Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
 ###############################################################################
 
 import simple_testing as st
+import time
 import math
+import testing_helper
 
 
 def main():
     """ Calls the   TEST   functions in this module. """
-    run_test_practice_problem3()
+    run_test_practice_problem3a()
+    run_test_practice_problem3b()
+
 
 # -----------------------------------------------------------------------------
 # Students: Some of the testing code below uses SimpleTestCase objects,
 #           from the imported   simple_testing (st)   module.
 # -----------------------------------------------------------------------------
 
+
+def run_test_practice_problem3a():
+    """ Tests the   practice_problem3a  function. """
+    ###########################################################################
+    # TODO: 3. Implement this TEST function.
+    #   It TESTS the  practice_problem3a  function defined below.
+    #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
+    #  __
+    #   Try to choose tests that might expose errors in your code!
+    #  __
+    #   As usual, include both EXPECTED and ACTUAL results in your tests
+    #   and compute the latter BY HAND (not by running your program).
+    ###########################################################################
+    # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
+    #    DIFFICULTY:      3
+    #    TIME ESTIMATE:   10 minutes.
+    ###########################################################################
+
+    # -------------------------------------------------------------------------
+    # Many tests, followed by extra ones appended at the end.
+    # They use the imported   simple_testing (st)   module.
+    # Each test is a SimpleTestCase with 3 arguments:
+    #   -- the function to test,
+    #   -- a list containing the argument(s) to send to the function,
+    #   -- the correct returned value.
+    # For example, the first test below will call
+    #   practice_problem3a(6, 8, 0.81)
+    # and compare the returned value against [7, 8] (the correct answer).
+    # -------------------------------------------------------------------------
+    tests = [st.SimpleTestCase(practice_problem3a,
+                               [6, 8, 0.81],
+                               [7, 8]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-4, 9, 0.25],
+                               [0, 1, 2, 6, 7, 8]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-5, 4, 0.25],
+                               [-5, 0, 1, 2]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-3, 8, 0.65],
+                               [0, 1, 6, 7, 8]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-4, 8, 0.65],
+                               [0, 1, 6, 7, 8]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-5, 8, 0.65],
+                               [-5, 00, 1, 6, 7, 8]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-3, 3, -1.0],
+                               [-1, 0, 1, 2, 3]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-3, 4, -1.0],
+                               [-1, 0, 1, 2, 3]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-3, 5, -1.0],
+                               [-1, 0, 1, 2, 3, 5]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-3, 6, -1.0],
+                               [-1, 0, 1, 2, 3, 5, 6]),
+             st.SimpleTestCase(practice_problem3a,
+                               [30, 0, -1000],
+                               []),
+             st.SimpleTestCase(practice_problem3a,
+                               [100, 1000, 1.414],
+                               [139, 183, 516, 560, 849, 893]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-1000, 1000000, math.sqrt(2) - 0.0000000001],
+                               [286602, 599291, 911980]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-1000, 1000000, 1.414213562373],
+                               [286602]),
+             st.SimpleTestCase(practice_problem3a,
+                               [-1000, 1000000, 1.414213562374],
+                               []),
+             ]
+    # More tests, with larger lists as the expected returned values
+    big_list = []
+    for k in range(900, 1001):
+        big_list.append(k)
+    tests.append(st.SimpleTestCase(practice_problem3a,
+                                   [900, 1000,
+                                    - math.sqrt(2) + 0.00001],
+                                   big_list))
+
+    big_list_without_915 = big_list.copy()
+    big_list_without_915.remove(915)
+    tests.append(st.SimpleTestCase(practice_problem3a,
+                                   [900, 1000,
+                                    - math.sqrt(2) + 0.0001],
+                                   big_list_without_915))
+
+    # -------------------------------------------------------------------------
+    # Run the tests in the   tests   list constructed above.
+    # -------------------------------------------------------------------------
+    st.SimpleTestCase.run_tests('practice_problem3a', tests)
+
+    ###########################################################################
+    # TODO: 3 continued:  More tests:
+    #      YOU add at least **   1   ** additional test here.
+    #  __
+    #   You can use the   SimpleTestCase  class as above, or use
+    #   the ordinary   expected/actual   way, your choice.
+    #  __
+    #   SUGGESTION: Ask an assistant to CHECK your tests to confirm
+    #               that they are adequate tests!
+    ###########################################################################
+
+
 def practice_problem3a(start, stop, threshold):
     """
     What comes in:
-      -- Nonnegative integers start and stop, with stop >= start
+      -- Non-negative integers start and stop, with stop >= start
       -- A number:  threshold
-    What goes out:  Returns a list of all the integers,  starting at start
-      and ending at stop (inclusive), for which the sum of the integer's
-      sine and cosine is bigger than the given threshold.
+    What goes out:  Returns a list of all the integers,
+      starting at start and ending at stop (inclusive),
+      for which the sum of the integer's sine and cosine
+      is bigger than the given threshold.
     Side effects: None.
     Examples:
-       practice_problem3b(-2, 2, 1.3)  returns  [1, 7]
-    as you can see if you work through this example using
-    the numbers presented below. (Do so!)
-
-    For these examples, the following (and more) numbers
-    (each is rounded to 2 decimal places for the sake of brevity)
-    are relevant:
+      For the following examples, the following numbers are helpful.
+      They are listed here just to help you avoid needing a calculator..
+      Each is rounded to 2 decimal places for the sake of brevity.
         -5:  sin =  0.96,  cos =  0.28,  sum =  1.24
         -4:  sin =  0.76,  cos = -0.65,  sum =  0.10
         -3:  sin = -0.14,  cos = -0.99,  sum = -1.13
@@ -83,59 +191,45 @@ def practice_problem3a(start, stop, threshold):
         12:  sin = -0.54,  cos =  0.84,  sum =  0.31
         13:  sin =  0.42,  cos =  0.91,  sum =  1.33
 
-    So if start is -5 and threshold is 0.25 and:
-       -- n is 3, then this function returns [-5, 0, 1]
-             because sin(-5) + cos(-5) IS > 0.25 and
-                     sin(-4) + cos(-4) is NOT > 0.25 and
-                     sin(-3) + cos(-3) is NOT > 0.25 and
-                     sin(-2) + cos(-2) is NOT > 0.25 and
-                     sin(-1) + cos(-1) is NOT > 0.25 and
-                     sin(0) + cos(0) IS > 0.25 and
-                     sin(1) + cos(1) IS > 0.25 and
-             and that makes the required  3  such numbers.
-       -- n is 4, then this function returns [-5, 0, 1, 2]
-       -- n is 5, then this function returns [-5, 0, 1, 2, 6]
-       -- n is 6, then this function returns [-5, 0, 1, 2, 6, 7]
-       -- n is 7, then this function returns [-5, 0, 1, 2, 6, 7, 8]
+    So  practice_problem3a(6, 8, 0.81)  returns  [7, 8]  since:
+      -- sin(6) + cos(6) is 0.68 -- NOT bigger than 0.81
+      -- sin(7) + cos(7) is 1.41 -- YES, bigger than 0.81
+      -- sin(8) + cos(8) is 0.84 -- YES, bigger than 0.81
 
-    while if start is -3 and the threshold is -1.0 and:
-       -- n is 3, then this function returns [-1, 0, 1]
-       -- n is 4, then this function returns [-1, 0, 1, 2]
-       -- n is 5, then this function returns [-1, 0, 1, 2, 3]
-       -- n is 6, then this function returns [-1, 0, 1, 2, 3, 5]
-
-    and if n is 0 (regardless of what start is),
-       this function returns []
-
-    and if threshold is more than the square root of 2,
-       this function returns (regardless of what start and n are):
-          [start, start + 1, start + 2, ... start + n - 1].
-
+    and  practice_problem3a(-4, 9, 0.25) returns  [0, 1, 2, 6, 7, 8]
+    because those are the only integers between -4 and 9, inclusive,
+    whose sine plus cosine is greater than 0.25.
+    [Look at the above numbers and make sure that you agree!]
     Type hints:
       :type start: int
-      :type n:     int
+      :type stop:  int
       :type threshold: float
     """
     ###########################################################################
-    # TODO: 3. Implement and test this function.
+    # TODO: 4. Implement and test this function.
     #          Some tests are already written for you (above),
     #          but you are required to write ADDITIONAL tests (above).
     ###########################################################################
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
-    #    DIFFICULTY:      5
-    #    TIME ESTIMATE:   < 15 minutes.
+    #    DIFFICULTY:      4
+    #    TIME ESTIMATE:   5 minutes.
     ###########################################################################
+    result = []
+    for k in range(start, stop + 1):
+        if math.sin(k) + math.cos(k) > threshold:
+            result.append(k)
+    return result
 
 
-def run_test_practice_problem3():
+def run_test_practice_problem3b():
     """ Tests the   practice_problem3b  function. """
     ###########################################################################
-    # TODO: 2. Implement this TEST function.
+    # TODO: 5. Implement this TEST function.
     #   It TESTS the  practice_problem3b  function defined below.
     #   Include at least ** 2 ** ADDITIONAL tests beyond those we wrote.
-    #
+    #  __
     #   Try to choose tests that might expose errors in your code!
-    #
+    #  __
     #   As usual, include both EXPECTED and ACTUAL results in your tests
     #   and compute the latter BY HAND (not by running your program).
     ###########################################################################
@@ -145,7 +239,7 @@ def run_test_practice_problem3():
     ###########################################################################
 
     # -------------------------------------------------------------------------
-    # 13 tests, plus a 14th after these.
+    # Many tests, followed by extra ones appended at the end.
     # They use the imported   simple_testing (st)   module.
     # Each test is a SimpleTestCase with 3 arguments:
     #   -- the function to test,
@@ -195,29 +289,39 @@ def run_test_practice_problem3():
                                [0, 1, 1.414213562373],
                                [286602]),
              ]
-    # 14th test:
+    # More tests, with larger lists as the expected returned values
     big_list = []
-    for k in range(888, 1888):
+    for k in range(888, 988):
         big_list.append(k)
     tests.append(st.SimpleTestCase(practice_problem3b,
-                                   [888, 1000,
-                                    - math.sqrt(2) - 0.00000000001],
+                                   [888, 100,
+                                    - math.sqrt(2) + 0.00000000001],
                                    big_list))
 
+    another_big_list = big_list.copy()
+    another_big_list.remove(915)
+    another_big_list.remove(959)
+    another_big_list.append(988)
+    another_big_list.append(989)
+    tests.append(st.SimpleTestCase(practice_problem3b,
+                                   [888, 100,
+                                    - math.sqrt(2) + 0.001],
+                                   another_big_list))
+
     # -------------------------------------------------------------------------
-    # Run the 14 tests in the   tests   list constructed above.
+    # Run the tests in the   tests   list constructed above.
     # -------------------------------------------------------------------------
     st.SimpleTestCase.run_tests('practice_problem3b', tests)
 
     ###########################################################################
-    # TO DO 2 continued:  More tests:
+    # TODO: 5 continued:  More tests:
     #      YOU add at least **   2   ** additional tests here.
-    #
-    # You can use the   SimpleTestCase  class as above, or use
-    # the ordinary   expected/actual   way, your choice.
-    #
-    # SUGGESTION: Ask an assistant to CHECK your tests to confirm
-    #             that they are adequate tests!
+    #  __
+    #   You can use the   SimpleTestCase  class as above, or use
+    #   the ordinary   expected/actual   way, your choice.
+    #  __
+    #   SUGGESTION: Ask an assistant to CHECK your tests to confirm
+    #               that they are adequate tests!
     ###########################################################################
 
 
@@ -225,20 +329,16 @@ def practice_problem3b(start, n, threshold):
     """
     What comes in:
       -- An integer:  start
-      -- An nonnegative integer:  n
+      -- An non-negative integer:  n
       -- A number:  threshold
     What goes out:  Returns a list of the first n integers,
       starting at start, for which the sum of the integer's
       sine and cosine is bigger than the given threshold.
     Side effects: None.
     Examples:
-       practice_problem3b(-2, 2, 1.3)  returns  [1, 7]
-    as you can see if you work through this example using
-    the numbers presented below. (Do so!)
-
-    For these examples, the following (and more) numbers
-    (each is rounded to 2 decimal places for the sake of brevity)
-    are relevant:
+      For the following examples, the following numbers are helpful.
+      They are listed here just to help you avoid needing a calculator..
+      Each is rounded to 2 decimal places for the sake of brevity.
         -5:  sin =  0.96,  cos =  0.28,  sum =  1.24
         -4:  sin =  0.76,  cos = -0.65,  sum =  0.10
         -3:  sin = -0.14,  cos = -0.99,  sum = -1.13
@@ -293,7 +393,7 @@ def practice_problem3b(start, n, threshold):
       :type threshold: float
     """
     ###########################################################################
-    # TODO: 3. Implement and test this function.
+    # TODO: 6. Implement and test this function.
     #          Some tests are already written for you (above),
     #          but you are required to write ADDITIONAL tests (above).
     ###########################################################################
@@ -301,185 +401,29 @@ def practice_problem3b(start, n, threshold):
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   < 15 minutes.
     ###########################################################################
+    result = []
+    k = start
+    while True:
+        if len(result) >= n:
+            break
+        if math.sin(k) + math.cos(k) > threshold:
+            result.append(k)
+        k = k + 1
+    return result
 
-def run_test_integers():
-    """ Tests the    integers    function. """
-    # -------------------------------------------------------------------------
-    # TODO: 2. Implement this TEST function.
-    #   It TESTS the  integers  function defined below.
-    #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
-    #
-    #   Try to choose tests that might expose errors in your code!
-    #
-    #   As usual, include both EXPECTED and ACTUAL results in your tests
-    #   and compute the latter BY HAND (not by running your program).
-    # -------------------------------------------------------------------------
-    ###########################################################################
-    # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
-    #    DIFFICULTY:      3
-    #    TIME ESTIMATE:   10 minutes.
-    ###########################################################################
-    print()
-    print('--------------------------------------------------')
-    print('Testing the   integers   function:')
-    print('--------------------------------------------------')
-
-    # Test 1:
-    expected = [3, 1, 4, 10, 10, 1, 3, 4, 30, -4]
-    answer = integers([(3, 1, 4),
-                       (10, 'hi', 10),
-                       [1, 2.5, 3, 4],
-                       'hello',
-                       [],
-                       ['oops'],
-                       [[55], [44]],
-                       [30, -4]
-                       ])
-    print('Expected is:', expected)
-    print('Actual is:  ', answer)
-
-
-def integers(sequence_of_sequences):
-    """
-    Returns a new list that contains all the integers
-    in the subsequences of the given sequence, in the order that they
-    appear in the subsequences.
-    For example, if the argument is:
-        [(3, 1, 4),
-         (10, 'hi', 10),
-         [1, 2.5, 3, 4],
-         'hello',
-         [],
-         ['oops'],
-         [[55], [44]],
-         [30, -4]
-        ]
-    then this function returns:
-        [3, 1, 4, 10, 10, 1, 3, 4, 30, -4]
-
-    Type hints:
-      :type sequence_of_sequences: (list|tuple) of (list|tuple|string)
-      :rtype: list of int
-    """
-    # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
-    #   Note that you should write its TEST function first (above).
-    # -------------------------------------------------------------------------
-    ###########################################################################
-    # HINT: The
-    #           type
-    #       function can be used to determine the type of
-    #       its argument (and hence to see if it is an integer).
-    #       For example, you can write expressions like:
-    #         -- if type(34) is int: ...
-    #         -- if type(4.6) is float: ...
-    #         -- if type('three') is str: ...
-    #         -- if type([1, 2, 3]) is list: ...
-    #       Note that the returned values do NOT have quotes.
-    #       Also, the   is   operator tests for equality (like ==)
-    #       but is more appropriate than == in this situation.
-    # -------------------------------------------------------------------------
-    ###########################################################################
-    # -------------------------------------------------------------------------
-    # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
-    #    DIFFICULTY:      6
-    #    TIME ESTIMATE:  10 minutes.
-    # -------------------------------------------------------------------------
-
-
-def run_test_big_letters():
-    """ Tests the    big_letters    function. """
-    # -------------------------------------------------------------------------
-    # TODO: 4. Implement this TEST function.
-    #   It TESTS the  big_letters  function defined below.
-    #   Include at least ** 1 ** ADDITIONAL test beyond those we wrote.
-    # -------------------------------------------------------------------------
-    ###########################################################################
-    # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
-    #    DIFFICULTY:      3
-    #    TIME ESTIMATE:   10 minutes.
-    ###########################################################################
-    print()
-    print('--------------------------------------------------')
-    print('Testing the   big_letters   function:')
-    print('--------------------------------------------------')
-
-    # Test 1:
-    expected = 'OTSSSOOPSAPSBOSCOPDOO'
-    answer = big_letters([(3, 1, 4),  # not a string
-                          'Ok what is ThiSSS?',  # OTSSS
-                          (10, 'Ok what is ThiSSS?', 10),  # not a string
-                          [],  # not a string
-                          ['oops'],  # not a string
-                          'oops',  #
-                          ['OOPS'],  # not a string
-                          '1 OOPS !',  # OOPS
-                          'A',  # A
-                          'ooPS $$&*#%&&',  # PS
-                          'B',  # B
-                          'oOpS',  # OS
-                          'C',  # C
-                          'OoPs'  # OP
-                          'D',  # D
-                          'OOps'  # OO
-                          ])
-    print('Expected is:', expected)
-    print('Actual is:  ', answer)
-
-
-def big_letters(sequence_of_sequences):
-    """
-    Returns a new STRING that contains all the upper-case letters
-    in the subsequences of the given sequence that are strings,
-    in the order that they appear in the subsequences.
-    For example, if the argument is:
-        [(3, 1, 4),                          # not a string
-        'Ok what is ThiSSS?',                # OTSSS
-        (10, 'Ok what is ThiSSS?', 10),      # not a string
-        [],                                  # not a string
-        ['oops'],                            # not a string
-        'oops',                              #
-        ['OOPS'],                            # not a string
-        '1 OOPS !',                          # OOPS
-        'A',                                 # A
-        'ooPS $$&*#%&&',                     # PS
-        'B',                                 # B
-        'oOpS',                              # OS
-        'C',                                 # C
-        'OoPs'                               # OP
-        'D',                                 # D
-        'OOps'                               # OO
-         ]
-    then this function returns:
-        'OTSSSOOPSAPSBOSCOPDOO'
-
-    Precondition:  the given argument is a sequence of sequences.
-    """
-    # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
-    #   Note that you should write its TEST function first (above).
-    # -------------------------------------------------------------------------
-    ###########################################################################
-    # IMPORTANT:
-    #   There is a STRING METHOD that determines whether or not
-    #   a string contains upper-case letters.  To find that method,
-    #   somewhere in this file type:
-    #           "".
-    #   and pause after the dot.
-    #   That will display ALL the STRING methods.
-    #
-    #   Look for a method whose name begins with
-    #           is
-    #       e.g.   isalnum()  isdigit() ... [but find the one for upper]
-    #
-    ###########################################################################
-    # -------------------------------------------------------------------------
-    # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
-    #    DIFFICULTY:      7
-    #    TIME ESTIMATE:  12 minutes.
-    # -------------------------------------------------------------------------
 
 # -----------------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
+# The   try .. except   prevents error messages on the console from being
+# intermingled with ordinary output to the console.
 # -----------------------------------------------------------------------------
-main()
+try:
+    main()
+except Exception:
+    testing_helper.print_colored('ERROR - While running this test,',
+                                 color='red')
+    testing_helper.print_colored('your code raised the following exception:',
+                                 color='red')
+    print()
+    time.sleep(1)
+    raise
