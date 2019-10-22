@@ -39,7 +39,7 @@ import testing_helper
 
 
 ###############################################################################
-# TODO: 2.  READ the   Point   class defined below.
+# TODO: 3.  READ the   Point   class defined below.
 #  Note especially its methods:
 #    clone
 #    distance_from
@@ -127,6 +127,12 @@ def main():
 ###############################################################################
 # The   Blob   class (and its methods) begins here.
 ###############################################################################
+# -----------------------------------------------------------------------------
+# DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
+#    DIFFICULTY for the methods in this class: varies from 2 to 7
+#    TIME ESTIMATE for implementing the entire class:   45 minutes.
+# -----------------------------------------------------------------------------
+
 class Blob(object):
 
     def __init__(self, c, n):
@@ -145,11 +151,13 @@ class Blob(object):
           :type c: str
           :type n: float
         """
-        # -------------------------------------------------------------------------
-        # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
-        #    DIFFICULTY for the methods in this class: varies from 2 to 7
-        #    TIME ESTIMATE for implementing the entire class:   35 minutes.
-        # -------------------------------------------------------------------------
+        # ---------------------------------------------------------------------
+        # TODO: 4.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         self.color = c
         self.size = n
         self.recent_color = None
@@ -159,6 +167,13 @@ class Blob(object):
         Mutates this Blob so that its  size  is 10 times what it was just
         before this method was called.
         """
+        # ---------------------------------------------------------------------
+        # TODO: 5.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         self.size = self.size * 10
 
     def make_child(self, other_blob):
@@ -170,6 +185,13 @@ class Blob(object):
           :type other_blob: Blob
           :rtype: Blob
         """
+        # ---------------------------------------------------------------------
+        # TODO: 6.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         self.recent_color = self.color
         return Blob(self.color, other_blob.size)
 
@@ -181,6 +203,13 @@ class Blob(object):
           :type other_blob: Blob
           :rtype: Point
         """
+        # ---------------------------------------------------------------------
+        # TODO: 7.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         return Point(self.size, other_blob.size)
 
     def get_distance(self, other_blob):
@@ -197,6 +226,13 @@ class Blob(object):
           :type other_blob: Blob
           :rtype: float
         """
+        # ---------------------------------------------------------------------
+        # TODO: 8.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         p1 = self.get_point(other_blob)
         p2 = other_blob.get_point(self)
         return p1.distance_from(p2)
@@ -205,6 +241,13 @@ class Blob(object):
         """
         Swaps this Blob's color with the given other_blob's color.
         """
+        # ---------------------------------------------------------------------
+        # TODO: 9.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         temp = self.color
         self.color = other_blob.color
         other_blob.color = temp
@@ -215,6 +258,13 @@ class Blob(object):
         has most recently returned.  If this Blob's  make_child  method
         has not yet been called, returns None.
         """
+        # ---------------------------------------------------------------------
+        # TODO: 10.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         return self.recent_color
 
     def get_bigger_size(self, more_blobs):
@@ -230,6 +280,13 @@ class Blob(object):
           :type more_blobs: List[Blob]
           :rtype: float
         """
+        # ---------------------------------------------------------------------
+        # TODO: 11.
+        #  a. READ specifications of this method (above).
+        #     Also READ its tests (below) if you need additional clarification
+        #     of the specification of this method.
+        #  b. Implement and test this method.
+        # ---------------------------------------------------------------------
         for k in range(len(more_blobs)):
             if more_blobs[k].size > self.size:
                 return more_blobs[k].size
@@ -671,11 +728,6 @@ def run_test_get_bigger_size():
     print_result_of_test(-1, size)
 
 
-
-
-
-
-
 ###############################################################################
 # The following are HELPER functions that display error messages in RED
 # and help make it easier for us to write tests.
@@ -904,4 +956,3 @@ except Exception:
     print()
     time.sleep(1)
     raise
-
