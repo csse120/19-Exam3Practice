@@ -6,6 +6,8 @@ Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
          and their colleagues.  October 2015.
 """
 
+import testing_helper
+
 
 class SimpleTestCase(object):
     """
@@ -47,13 +49,16 @@ class SimpleTestCase(object):
         """
         your_answer = self.function_to_test(*(self.arguments_to_use))
 
+        print()
+
         if your_answer == self.correct_returned_value:
             result = 'PASSED'
+            testing_helper.print_colored(
+                'Your code {:6} this test'.format(result), color='blue')
         else:
             result = 'FAILED'
-
-        print()
-        print('Your code {:6} this test'.format(result))
+            testing_helper.print_colored(
+                'Your code {:6} this test'.format(result), color='red')
 
         if len(self.arguments_to_use) == 0:
             format_string = '  ( )'
@@ -85,6 +90,9 @@ class SimpleTestCase(object):
 
         if failures > 0:
             print()
-            print('************************************')
-            print('*** YOUR CODE FAILED SOME TESTS. ***')
-            print('************************************')
+            testing_helper.print_colored(
+                '************************************', color='red')
+            testing_helper.print_colored(
+                '*** YOUR CODE FAILED SOME TESTS. ***', color='red')
+            testing_helper.print_colored(
+                '************************************', color='red')
