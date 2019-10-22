@@ -93,13 +93,11 @@ def hourglass(window, n, point, radius, color):
     a color that rosegraphics understands.
     """
     # -------------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
-    #       We provided some tests for you (above).
-    # -------------------------------------------------------------------------
-    ###########################################################################
-    # BONUS: Avoid replicated code if you can.  Hint: You are allowed
+    # TODO: 3. Implement and test this function.
+    #          We provided some tests for you (above).
+    #  ########################################################################
+    #  BONUS: Avoid replicated code if you can.  Hint: You are allowed
     #        to define an additional function(s) if you wish.
-    ###########################################################################
     # -------------------------------------------------------------------------
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      8
@@ -169,14 +167,12 @@ def many_hourglasses(window, square, m, colors):
     # -------------------------------------------------------------------------
     # TODO: 3. Implement and test this function.
     #       We provided some tests for you (above).
-    # -------------------------------------------------------------------------
-    ###########################################################################
-    # IMPORTANT:
+    #  ########################################################################
+    #  IMPORTANT:
     #   1. Partial credit if you draw JUST the rectangles.
     #   2. No additional credit unless you CALL the  hourglass  function
     #        in the PREVIOUS problem appropriately
     #        to draw the hourglass figures.
-    ###########################################################################
     # -------------------------------------------------------------------------
     # DIFFICULTY AND TIME RATINGS (see top of this file for explanation)
     #    DIFFICULTY:      7  (assuming that you already have
